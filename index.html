@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Try attaching to service</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="bootstrap.css">
+  
+  <script src="jquery-3.1.1.js"></script>
+  
+  <script src="jquery-ui.js"></script>
+
+  <script src="jquery.ui.touch-punch.js"></script>
+  
+  <script src="bootstrap.js"></script>
+
+  <style>
+    .bottom {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      height: 10%;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Service Connectivity</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+  <h1 id="demo">Click me for Data</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <div id="result" class="list-group well" style="height:300px;width:100%;overflow:auto;"></div>
+    </div>
+
+    <div id="id:8341343" class="col-xs-6 panel-group">
+      <div class="panel panel-info">
+
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#pid8341343">Home Teaching Route: 8341343</a>
+          </h4>
+        </div>
+
+        <div id="pid8341343" class="panel-collapse collapse in">
+
+          <div class="panel" style="margin:0;color:#3c763d;background-color:#dff0d8;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#teachers">Teachers</a>
+              </h4>
+            </div>
+            <div id="teachers" class="panel-collapse collapse in">
+              <ul id="hometeacher" class="list-group well">
+              </ul>
+            </div>
+          </div>
+
+          <div class="panel" style="margin:0;color:#8a6d3b;background-color:#fcf8e3;">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#homes">Homes</a>
+              </h4>
+            </div>
+            <div id="homes" class="panel-collapse collapse in">
+              <ul id="family" class="list-group well">
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="bottom" class="bottom">
+  <table class="table table-striped table-bordered well">
+    <thead>
+      <tr>
+        <th>Route</th>
+        <th>Teachers</th>
+        <th>Homes</th>
+      </tr>
+    </thead>
+    <tbody id="output_table">
+    </tbody>
+  </table>
+</div>
+
+  <script>
+    var vDataset;
+
+    // Inspect the array of MutationRecord objects to identify the nature of the change
+    function mutationObjectCallback(mutationRecordsList) {
+      console.log("mutationObjectCallback invoked.");
+
+      mutationRecordsList.forEach(function(mutationRecord) {
+        console.log("Type of mutation: " + mutationRecord.type);
+        if ("attributes" === mutationRecord.type) {
+          console.log("Old attribute value: " + mutationRecord.oldValue);
+        }
+      });
+    }
+
+
+    $(document).ready(function () {
+      $("#demo").click(function () {
+        $("#demo").html("Waiting for data...");
+
+        //$.getJSON("http://api.geonames.org/siblingsJSON?formatted=true&geonameId=3017382&username=darrenaa&style=full", function (result) {
+        $.getJSON("https://raw.githubusercontent.com/laurenra/home-teaching-app/master/organizer-ws/src/main/webapp/resources/eq-home-teaching-sample.json", function (result) {   
+
+          var vHometeacherCount = 0;
+          vDataset = result;
+
+          var vHtmlStart = "<a href=\"#\" id=\"listitem";
+          //var vHtmlMiddle = "\" class=\"namebox\" draggable=\"true\" ondragstart=\"drag(event)\">";
+          var vHtmlMiddle = "\" class=\"list-group-item\">";
+          var vHtmlEnd = "</a>\r\n";
+
+          $("#demo").html("Data Received");
+          $("#result").html("");
+
+
+
+          for (idistrict = 0; idistrict < vDataset.districts.length; idistrict++) 
+          {
+            for (icompanionship = 0; icompanionship < vDataset.districts[idistrict].companionships.length; icompanionship++ )
+            {
+              for( ihometeacher = 0; ihometeacher < vDataset.districts[idistrict].companionships[icompanionship].homeTeachers.length; ihometeacher++)
+              {
+                var vAddNameBoxHtml = vHtmlStart;
+                vAddNameBoxHtml += vHometeacherCount++;
+                vAddNameBoxHtml += vHtmlMiddle;
+                vAddNameBoxHtml += vDataset.districts[idistrict].companionships[icompanionship].homeTeachers[ihometeacher].person.name;
+                vAddNameBoxHtml += vHtmlEnd;
+                $("#result").append(vAddNameBoxHtml);
+              }
+            }
+          }
+          
+          $(".list-group").sortable({ connectWith: ".list-group", revert: "invalid" });
+
+        });
+      });
+
+
+      //$('html').on("click mousedown mouseup focus blur keydown change",function(e){console.log(e);});
+      
+      // Create an observer object and assign a callback function
+      var observerObject = new MutationObserver(mutationObjectCallback);
+
+      // Register the target node to observe and specify which DOM changes to watch
+      observerObject.observe( document.getElementById('pid8341343'), { childList: true, subtree: true } );
+
+    });
+
+  </script>
+
+</body>
+
+</html>
