@@ -1,0 +1,189 @@
+/*
+ * index.css
+ */
+
+.panel-group {
+    margin: auto;
+    width: 50%;
+}
+
+.item-transparent
+{
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.0);
+}
+
+a.item-transparent
+{
+    color: rgba(255, 255, 255, 1.0);
+}
+
+.item-opaque
+{
+    text-align: center;
+    text-decoration: none;
+}
+
+.item-fixed
+{
+    font-weight: bold;
+    background-color: rgb(232,232,232)
+}
+
+body {
+    z-index: -1;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    height: 0;
+    width: 0;
+    z-index: 2;
+    color: rgba(255, 255, 255, 1.0);
+    background: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.Overlay .Overlay-Left {
+    left: 0;
+    height: 100%;
+    width: 0;
+}
+
+.Overlay .Overlay-Right {
+    right: 0;
+    height: 100%;
+    width: 0%;
+}
+
+.Overlay .Overlay-Top {
+    left: 0;
+    height: 0;
+    width: 66%;
+}
+
+.Overlay .Overlay-Bottom {
+    bottom: 0;
+    left: 0;
+    height: 0%;
+    width: 66%;
+}
+
+.Trap-Interaction {
+    position: fixed;
+    top: 0;
+    height: 0;
+    width: 0;
+    z-index: 1;
+    color: rgba(0, 0, 0, 0.0);
+    background: rgba(0, 0, 0, 0.0);
+}
+
+.Overlay .Overlay-Content {
+    position: relative;
+    top: 5%;
+    width: 100%;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.ScrollBox {
+    position: relative;
+    top: 10%;
+    width: 95%;
+    height: 75%;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.Overlay li {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: rgba(255, 255, 255, 1.0);
+    display: block;
+}
+
+.Overlay li:hover,
+.Overlay li:focus {
+    color: #f1f1f1;
+}
+
+.Overlay-Close-Left {
+    position: absolute;
+    font-size: 60px;
+    color: rgba(255, 255, 255, 1.0);
+    top: 0;
+    left: 5%;
+}
+
+.Overlay-Close-Right {
+    position: absolute;
+    font-size: 60px;
+    color: rgba(255, 255, 255, 1.0);
+    top: 0;
+    right: 5%;
+}
+
+.RightAlignedElement {
+    border-style: none;
+    border-width: 1px;
+    border-left-style: solid;
+    background: rgba(255, 255, 0, 0.1);
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    line-height: 2.5em;
+    height: 100%;
+    right: 0;
+    min-width: 10%;
+    transition: 0.5s;
+}
+
+.RightAlignedElement:hover {
+    font-size: 30px;
+    line-height: 1.25em;
+    min-width: 15%;
+    transition: 0.5s;
+}
+
+@media screen and (max-height: 640px),
+screen and (max-width: 640px) {
+    .panel-group {
+        margin: auto;
+        width: 75%;
+    }
+}
+
+@media screen and (max-height: 400px),
+screen and (max-width: 400px) {
+    .Overlay li {
+        font-size: 20px
+    }
+    .Overlay-Close-Left {
+        position: absolute;
+        font-size: 40px;
+        color: rgba(255, 255, 255, 1.0);
+        top: 0;
+        left: 3%;
+    }
+    .Overlay-Close-Right {
+        position: absolute;
+        font-size: 40px;
+        color: rgba(255, 255, 255, 1.0);
+        top: 0;
+        right: 3%;
+    }
+    .panel-group {
+        margin: auto;
+        width: 100%;
+    }
+}

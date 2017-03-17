@@ -1,47 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+
 <head>
-  <link rel="stylesheet" type-"text/css" href="Hometeaching.css">
-  <script>
-  	function allowDrop(ev)
-  	{
-  		ev.preventDefault();
-  	}
+    <title>Sample Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="bootstrap.min.js"></script>
 
-  	function drag(ev)
-  	{
-  		ev.dataTransfer.setData("text", ev.target.id);
-  	}
+    <style>
+        body {
+            padding-top: 10%;
+        }
+        
+        .RightAlignedElement {
+            border-style: none;
+            border-width: 1px;
+            border-left-style: solid;
+            background: rgba(255, 255, 0, 0.1);
+            position: absolute;
+            margin: auto;
+            text-align: center;
+            line-height: 2.5em;
+            height: 100%;
+            right: 0;
+            min-width: 10%;
+            transition: 0.5s;
+        }
+        
+        .RightAlignedElement:hover {
+            font-size: 30px;
+            line-height: 1.25em;
+            min-width: 25%;
+            transition: 0.5s;
+        }
+    </style>
 
-  	function drop(ev, el)
-  	{
-  		ev.preventDefault();
-  		var data = ev.dataTransfer.getData("text");
-  		el.appendChild(document.getElementById(data));
-  	}
-  </script>
 </head>
+
 <body>
-  <div id="UnGrouped" class="dropbox" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-    <div class="title">UnGrouped</div>
 
-    <div id="namebox1" class="namebox" draggable="true" ondragstart="drag(event)">Darren</div>
-    <div id="namebox2" class="namebox" draggable="true" ondragstart="drag(event)">Lauren</div>
-    <div id="namebox3" class="namebox" draggable="true" ondragstart="drag(event)">Dwight</div>
-    <div id="namebox4" class="namebox" draggable="true" ondragstart="drag(event)">Dale</div>
-    <div id="namebox5" class="namebox" draggable="true" ondragstart="drag(event)">Deona</div>
-    <div id="namebox6" class="namebox" draggable="true" ondragstart="drag(event)">Alydia</div>
-    <div id="namebox7" class="namebox" draggable="true" ondragstart="drag(event)">Cheri</div>          
-  </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 list-group">
+                <a class="list-group-item" href=""><span class="glyphicon glyphicon-plus RightAlignedElement"></span>Darren Anderson</a>
+            </div>
+        </div>
+    </div>
 
-  <div id="Group1" class="dropbox" draggable="true" ondragstart="drag(event)" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-  	<div class="title">Group 1</div>
-  </div>
-  <div id="Group2" class="dropbox" draggable="true" ondragstart="drag(event)" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-  	<div class="title">Group 2</div>
-  </div>
-  <div id="Group3" class="dropbox" draggable="true" ondragstart="drag(event)" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-  	<div class="title">Group 3</div>
-  </div>
+
 </body>
+
 </html>
