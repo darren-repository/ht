@@ -25,36 +25,34 @@
     <!-- Trap any interaction with elements behind the Trap-Interaction class -->
     <div class="Trap-Interaction"></div>
 
-    <div class="Overlay">
-        <!-- HomeTeacher Overlay From Left -->
-        <div id="ovlHometeachers" class="Overlay Overlay-Left">
 
-            <!-- Button to close the overlay navigation -->
-            <span href="javascript:void(0)" class="Overlay-Close-Right" onclick="ToggleOverlay(ovlHometeachers,false)">&times;</span>
+    <!-- HomeTeacher Overlay From Left -->
+    <div id="ovlHometeachers" class="Overlay-Left">
 
-            <div class="ScrollBox">
-                <!-- Overlay content -->
-                <ul id="unassigned-hometeachers">
-                </ul>
-            </div>
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="Overlay-Close-Right" onclick="ToggleOverlay(ovlHometeachers,false)">&times;</a>
+
+        <div class="ScrollBox">
+            <!-- Overlay content -->
+            <ul id="unassigned-hometeachers">
+            </ul>
         </div>
     </div>
 
 
-    <div class="Overlay">
-        <div id="ovlFamilies" class="Overlay Overlay-Right">
+    <div id="ovlFamilies" class="Overlay-Right">
 
-            <!-- Button to close the overlay navigation -->
-            <a href="javascript:void(0)" class="Overlay-Close-Left" onclick="ToggleOverlay(ovlFamilies,false)">&times;</a>
+        <!-- Button to close the overlay navigation -->
+        <a href="javascript:void(0)" class="Overlay-Close-Left" onclick="ToggleOverlay(ovlFamilies,false)">&times;</a>
 
 
-            <div class="ScrollBox">
-                <!-- Overlay content -->
-                <ul id="unassigned-families">
-                </ul>
-            </div>
+        <div class="ScrollBox">
+            <!-- Overlay content -->
+            <ul id="unassigned-families">
+            </ul>
         </div>
     </div>
+
 
     <div class="Underlay">
 
@@ -96,7 +94,7 @@
                         <div id="assign-hometeachers" class="panel-collapse collapse in">
                             <ul id="hometeachers" class="well">
                                 <a href="#" class="list-group-item item-fixed item-opaque" onclick="OnClick_OpenOverlay_AddListItem(ovlHometeachers)">
-                                    <span class="glyphicon glyphicon-plus RightAlignedElement"></span>Add HomeTeachers</a>
+                                    <span class="glyphicon glyphicon-plus Inset-Element-Left"></span>Add HomeTeachers</a>
                             </ul>
                         </div>
                     </div>
@@ -110,7 +108,7 @@
                         <div id="assign-families" class="panel-collapse collapse in">
                             <ul id="families" class="well">
                                 <a href="#" class="list-group-item item-fixed item-opaque" onclick="OnClick_OpenOverlay_AddListItem(ovlFamilies)">Add Families
-                                    <span class="glyphicon glyphicon-plus RightAlignedElement"></span>
+                                    <span class="glyphicon glyphicon-plus Inset-Element-Left"></span>
                                 </a>
                             </ul>
                         </div>
@@ -260,8 +258,8 @@
                 var vNodeCount = 0;
                 vDataset = result;
 
-                var vHtmlStart = "<a id=NodeID";
-                var vHtmlMiddle = " href=\"#\" class=\"list-group-item item-transparent moveable\"><span class=\"glyphicon glyphicon-plus RightAlignedElement\"></span>";
+                var vHtmlElement = "<a id=NodeID";
+                var vHtmlClass = "\" class=\"list-group-item item-transparent moveable\"><span class=\"glyphicon glyphicon-plus Inset-Element-Left\"></span>";
                 var vHtmlEnd = "</a>";
 
                 $("#unassigned-hometeachers").html("");
@@ -269,9 +267,9 @@
 
                 for (imember = 0; imember < vDataset.members.length; imember++)
                 {
-                    var vAddNameBoxHtml = vHtmlStart;
-                    vAddNameBoxHtml += vNodeCount++;
-                    vAddNameBoxHtml += vHtmlMiddle;
+                    var vAddNameBoxHtml = vHtmlElement;
+                    vAddNameBoxHtml += vNodeCount++;//Use NodeCount to ID the element
+                    vAddNameBoxHtml += vHtmlClass;
                     vAddNameBoxHtml += vDataset.members[imember].name;
                     vAddNameBoxHtml += vHtmlEnd;
 
@@ -285,19 +283,19 @@
                     }
                 }
 
-                $(".list-group-item").disableSelection();
+                $(".moveable").disableSelection();
 
-                $("#unassigned-hometeachers").click(function() {
+                $("#unassigned-hometeachers").click(function(event) {
                     OnClick_MoveListItem($("#hometeachers")[0], event);
                 });
-                $("#hometeachers").click(function() {
+                $("#hometeachers").click(function(event) {
                     OnClick_MoveListItem($("#unassigned-hometeachers")[0], event);
                 });
 
-                $("#unassigned-families").click(function() {
+                $("#unassigned-families").click(function(event) {
                     OnClick_MoveListItem($('#families')[0], event);
                 });
-                $("#families").click(function() {
+                $("#families").click(function(event) {
                     OnClick_MoveListItem($('#unassigned-families')[0], event);
                 });
             });

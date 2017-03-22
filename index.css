@@ -35,7 +35,13 @@ body {
     z-index: -1;
 }
 
-.Overlay {
+.moveable
+{
+    cursor:pointer;
+}
+
+.Overlay-Left, .Overlay-Right, .Overlay-Top, .Overlay-Bottom
+{
     position: fixed;
     top: 0;
     height: 0;
@@ -48,25 +54,25 @@ body {
     transition: 0.5s;
 }
 
-.Overlay .Overlay-Left {
+.Overlay-Left {
     left: 0;
     height: 100%;
     width: 0;
 }
 
-.Overlay .Overlay-Right {
+.Overlay-Right {
     right: 0;
     height: 100%;
     width: 0%;
 }
 
-.Overlay .Overlay-Top {
+.Overlay-Top {
     left: 0;
     height: 0;
     width: 66%;
 }
 
-.Overlay .Overlay-Bottom {
+.Overlay-Bottom {
     bottom: 0;
     left: 0;
     height: 0%;
@@ -117,40 +123,61 @@ body {
     color: #f1f1f1;
 }
 
-.Overlay-Close-Left {
+.Overlay-Close-Left, .Overlay-Close-Right
+{
     position: absolute;
     font-size: 60px;
     color: rgba(255, 255, 255, 1.0);
     top: 0;
+}
+
+.Overlay-Close-Left
+{
     left: 5%;
 }
 
-.Overlay-Close-Right {
-    position: absolute;
-    font-size: 60px;
-    color: rgba(255, 255, 255, 1.0);
-    top: 0;
+.Overlay-Close-Right
+{
     right: 5%;
 }
 
-.RightAlignedElement {
-    border-style: none;
-    border-width: 1px;
-    border-left-style: solid;
-    background: rgba(255, 255, 0, 0.1);
-    position: absolute;
-    margin: auto;
-    text-align: center;
-    line-height: 2.5em;
-    height: 100%;
-    right: 0;
-    min-width: 10%;
-    transition: 0.5s;
+/* remove underline from <a> for the close 'X' on the overlay */
+a.Overlay-Close-Left, a.Overlay-Close-Right
+{
+    text-decoration: none;
 }
 
-.RightAlignedElement:hover {
+
+.Inset-Element-Right, .Inset-Element-Left
+{
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    border-style: none;
+    border-width: 1px;   
+    height: 100%;
+    min-width: 10%;
+    transition: 0.5s; 
+}
+
+.Inset-Element-Right
+{
+    border-left-style: solid;
+    background: rgba(255, 255, 0, 0.1);
+    right: 0;
+}
+
+.Inset-Element-Left
+{
+    border-right-style: solid;
+    background: rgba(255, 255, 0, 0.1);
+    left: 0;
+}
+
+.Inset-Element-Right:hover, .Inset-Element-Left:hover
+{
     font-size: 30px;
-    line-height: 1.25em;
     min-width: 15%;
     transition: 0.5s;
 }
